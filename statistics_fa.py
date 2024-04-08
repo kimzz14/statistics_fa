@@ -27,7 +27,7 @@ ref_DICT = {}
 seqName_LIST = []
 for line in fin:
     if line.startswith('>') == True:
-        seqName = line[1].rstrip('\n')
+        seqName = line[1:].split('\t')[0].split(' ')[0].rstrip('\n')
         seqName_LIST += [seqName]
         ref_DICT[seqName] = []
     else:
