@@ -57,7 +57,7 @@ print('sequence N90:' + '\t' + '\t'.join(map(str, get_N(seqLength_sortedLIST, 90
 
 fout = open(infile + '.' + 'lengthDistribution', 'w')
 for N in range(1, 101):
-    N_length = get_N(sortedContigLength_LIST, N)
+    N_length = get_N(seqLength_sortedLIST, N)
     fout.write(str(N) + '\t' + '\t'.join(map(str,(N_length))) + '\n')
 fout.close()
 
