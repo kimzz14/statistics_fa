@@ -55,6 +55,12 @@ print('Max sequence length:' + '\t' + str(maxSeqLength))
 print('sequence N50:' + '\t' + str(get_N(seqLength_sortedLIST, 50)))
 print('sequence N90:' + '\t' + str(get_N(seqLength_sortedLIST, 90)))
 
+fout = open(infile + '.' + 'lengthDistribution', 'w')
+for N in range(1, 101):
+    N_length = get_N(seqLength_sortedLIST, N)
+    fout.write(str(N) + '\t' + str(N_length) + '\n')
+fout.close()
+
 import math
 
 logCount_LIST = [0]*(int(math.log2(maxSeqLength)) + 1)
