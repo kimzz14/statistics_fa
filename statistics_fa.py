@@ -1,11 +1,11 @@
 #####################################################################################
-def get_N(seqLength_sortedLIST, N):
-    totalLength = sum(seqLength_sortedLIST)
+def get_N(sortedLength_LIST, N):
+    totalLength = sum(sortedLength_LIST)
     sumLength = 0
-    for seqLength in seqLength_sortedLIST:
-        sumLength += seqLength
-        if float(sumLength) / totalLength > (float(N)/100):
-            return seqLength
+    for idx, length in enumerate(sortedLength_LIST):
+        sumLength += length
+        if float(sumLength) / totalLength >= (float(N)/100):
+            return length, idx+1
 #####################################################################################
 from optparse import OptionParser
 import sys
@@ -52,13 +52,13 @@ print('Number of sequences:' + '\t' + str(seqN))
 print('Total sequence length:' + '\t' + str(totalLength))
 print('Min sequence length:' + '\t' + str(minSeqLength))
 print('Max sequence length:' + '\t' + str(maxSeqLength))
-print('sequence N50:' + '\t' + str(get_N(seqLength_sortedLIST, 50)))
-print('sequence N90:' + '\t' + str(get_N(seqLength_sortedLIST, 90)))
+print('sequence N50:' + '\t' + '\t'.join(map(str, get_N(seqLength_sortedLIST, 50))))
+print('sequence N90:' + '\t' + '\t'.join(map(str, get_N(seqLength_sortedLIST, 90))))
 
 fout = open(infile + '.' + 'lengthDistribution', 'w')
 for N in range(1, 101):
-    N_length = get_N(seqLength_sortedLIST, N)
-    fout.write(str(N) + '\t' + str(N_length) + '\n')
+    N_length = get_N(sortedContigLength_LIST, N)
+    fout.write(str(N) + '\t' + '\t'.join(map(str,(N_length))) + '\n')
 fout.close()
 
 import math
